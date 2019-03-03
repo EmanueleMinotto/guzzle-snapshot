@@ -1,0 +1,39 @@
+{
+    "name": "emanueleminotto/guzzle-snapshot",
+    "type": "library",
+    "description": "Guzzle Snapshots Middleware",
+    "keywords": [
+        "guzzle",
+        "snapshot",
+        "middleware"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "~7.1",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "require-dev": {
+        "doctrine/cache": "^1.8",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "mikey179/vfsStream": "^1.6",
+        "phpunit/phpunit": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EmanueleMinotto\\GuzzleSnapshot\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EmanueleMinotto\\GuzzleSnapshot\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "fix-style": "php-cs-fixer fix",
+        "check-style": "php-cs-fixer fix --dry-run --diff"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

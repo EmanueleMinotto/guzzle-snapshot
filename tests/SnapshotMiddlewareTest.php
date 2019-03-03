@@ -25,6 +25,11 @@ class SnapshotMiddlewareTest extends TestCase
     private $fileSystem;
 
     /**
+     * @var SnapshotMiddleware
+     */
+    private $middleware;
+
+    /**
      * @var HandlerStack
      */
     private $stack;
@@ -39,15 +44,25 @@ class SnapshotMiddlewareTest extends TestCase
         $this->fileSystem = vfsStream::setup();
 
         $strategy = new ReadableFileStrategy($this->fileSystem->url());
-        $middleware = new SnapshotMiddleware($strategy);
+        $this->middleware = new SnapshotMiddleware($strategy);
 
         $this->stack = new HandlerStack();
         $this->stack->setHandler(new CurlHandler());
-        $this->stack->push($middleware);
+        $this->stack->push($this->middleware);
 
         $this->client = new Client([
             'handler' => $this->stack,
         ]);
+    }
+
+    public function testExecutionWithRequestStorage()
+    {
+        $this->assertFalse($this->fileSystem->hasChildren());
+
+        $this->middleware->setRequestStorage(true);
+        $this->client->get('https://httpbin.org/get');
+        $this->assertTrue($this->fileSystem->hasChildren());
+        $this->assertCount(2, $this->fileSystem->getChildren());
     }
 
     public function testExecution()
@@ -56,6 +71,7 @@ class SnapshotMiddlewareTest extends TestCase
 
         $this->client->get('https://httpbin.org/get');
         $this->assertTrue($this->fileSystem->hasChildren());
+        $this->assertCount(1, $this->fileSystem->getChildren());
 
         $handler = $this->createMock(CurlHandler::class);
         $handler
@@ -66,6 +82,8 @@ class SnapshotMiddlewareTest extends TestCase
         $this->stack->setHandler($handler);
 
         $this->client->get('https://httpbin.org/get');
+
+        $this->assertCount(1, $this->fileSystem->getChildren());
     }
 
     public function testWithException()

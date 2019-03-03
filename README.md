@@ -1,4 +1,4 @@
-# guzzle-snapshot
+# Guzzle Snapshots Middleware
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Guzzle 6.* middleware to store responses and requests and replay them in tests.
+Guzzle 6 middleware to store responses and requests and replay them in tests.
 
 ## Structure
 
@@ -83,17 +83,17 @@ If you discover any security related issues, please email minottoemanuele@gmail.
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/emanueleminotto/guzzle-snapshot.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/EmanueleMinotto/guzzle-snapshot/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/emanueleminotto/guzzle-snapshot.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/EmanueleMinotto/guzzle-snapshot
+[link-packagist]: https://packagist.org/packages/emanueleminotto/guzzle-snapshot
 [link-travis]: https://travis-ci.org/EmanueleMinotto/guzzle-snapshot
 [link-scrutinizer]: https://scrutinizer-ci.com/g/EmanueleMinotto/guzzle-snapshot/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/EmanueleMinotto/guzzle-snapshot
-[link-downloads]: https://packagist.org/packages/EmanueleMinotto/guzzle-snapshot
+[link-downloads]: https://packagist.org/packages/emanueleminotto/guzzle-snapshot
 [link-author]: https://github.com/EmanueleMinotto
 [link-contributors]: ../../contributors

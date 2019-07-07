@@ -69,7 +69,9 @@ class SnapshotMiddlewareTest extends TestCase
     {
         $this->assertFalse($this->fileSystem->hasChildren());
 
-        $this->client->get('https://httpbin.org/get');
+        $response = $this->client->get('https://httpbin.org/get');
+
+        $this->assertNotEmpty($response->getBody()->getContents());
         $this->assertTrue($this->fileSystem->hasChildren());
         $this->assertCount(1, $this->fileSystem->getChildren());
 

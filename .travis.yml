@@ -2,13 +2,13 @@ dist: trusty
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 env:
-  # default guzzle version
   - GUZZLE_VERSION=7.*
+  - GUZZLE_VERSION=6.*
 
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
@@ -22,11 +22,12 @@ cache:
 matrix:
   include:
     - php: 7.1
+      env: GUZZLE_VERSION=6.* COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+    - php: 7.2
       env: GUZZLE_VERSION=7.* COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+    # only guzzle 6 supports php 7.1
     - php: 7.1
       env: GUZZLE_VERSION=6.*
-    - php: 7.1
-      env: GUZZLE_VERSION=7.*
 
 before_script:
   - travis_retry composer require "guzzlehttp/guzzle:${GUZZLE_VERSION}" --no-update

@@ -6,6 +6,10 @@ php:
   - 7.2
   - 7.3
 
+env:
+  # default guzzle version
+  - GUZZLE_VERSION=7.*
+
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
@@ -18,9 +22,14 @@ cache:
 matrix:
   include:
     - php: 7.1
-      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+      env: GUZZLE_VERSION=7.* COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+    - php: 7.1
+      env: GUZZLE_VERSION=6.*
+    - php: 7.1
+      env: GUZZLE_VERSION=7.*
 
 before_script:
+  - travis_retry composer require "guzzlehttp/guzzle:${GUZZLE_VERSION}" --no-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
 
 script:

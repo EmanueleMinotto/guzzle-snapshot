@@ -15,7 +15,7 @@
     "require-dev": {
         "doctrine/cache": "^1.8",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "mikey179/vfsStream": "^1.6",
+        "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": ">=7.0"
     },
     "autoload": {

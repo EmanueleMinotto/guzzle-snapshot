@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Guzzle 6 middleware to store responses and requests and replay them in tests.
+[Guzzle](https://github.com/guzzle/guzzle) 6 & 7 middleware to store responses and requests and replay them in tests.
 
 ## Structure
 

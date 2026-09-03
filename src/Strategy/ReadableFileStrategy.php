@@ -6,8 +6,7 @@ namespace EmanueleMinotto\GuzzleSnapshot\Strategy;
 
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
-use function GuzzleHttp\Psr7\parse_response;
-use function GuzzleHttp\Psr7\str;
+use GuzzleHttp\Psr7\Message;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -26,7 +25,7 @@ class ReadableFileStrategy implements StrategyInterface
 
     public function getPromise(RequestInterface $request): ?PromiseInterface
     {
-        $id = sha1(str($request));
+        $id = sha1(Message::toString($request));
 
         $responseFile = sprintf('%s/%s-response.txt', $this->directory, $id);
         if (!file_exists($responseFile)) {
@@ -35,7 +34,7 @@ class ReadableFileStrategy implements StrategyInterface
 
         try {
             return new FulfilledPromise(
-                parse_response(file_get_contents($responseFile))
+                Message::parseResponse(file_get_contents($responseFile))
             );
         } catch (Throwable $exception) {
             return null;
@@ -44,17 +43,17 @@ class ReadableFileStrategy implements StrategyInterface
 
     public function storeRequest(RequestInterface $request): void
     {
-        $this->storeContent($request, 'request', str($request));
+        $this->storeContent($request, 'request', Message::toString($request));
     }
 
     public function storeResponse(RequestInterface $request, ResponseInterface $response): void
     {
-        $this->storeContent($request, 'response', str($response));
+        $this->storeContent($request, 'response', Message::toString($response));
     }
 
     private function storeContent(RequestInterface $request, string $type, string $content): void
     {
-        $id = sha1(str($request));
+        $id = sha1(Message::toString($request));
         $filename = sprintf('%s/%s-%s.txt', $this->directory, $id, $type);
         file_put_contents($filename, $content);
     }

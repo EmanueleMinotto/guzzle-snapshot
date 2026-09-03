@@ -8,7 +8,7 @@ use Doctrine\Common\Cache\Cache;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Psr7\str;
+use GuzzleHttp\Psr7\Message;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -63,7 +63,7 @@ class DoctrineCacheStrategyTest extends TestCase
             ->expects($this->once())
             ->method('fetch')
             ->with($id.'-response')
-            ->willReturn(str(new Response()))
+            ->willReturn(Message::toString(new Response()))
         ;
 
         $promise = $this->strategy->getPromise($request);
@@ -77,7 +77,7 @@ class DoctrineCacheStrategyTest extends TestCase
         $this->cache
             ->expects($this->once())
             ->method('save')
-            ->with('28b67e05be4482c82f7fe28ea091ec6669e1cac4-request', str($request))
+            ->with('28b67e05be4482c82f7fe28ea091ec6669e1cac4-request', Message::toString($request))
         ;
 
         $this->strategy->storeRequest($request);
@@ -91,7 +91,7 @@ class DoctrineCacheStrategyTest extends TestCase
         $this->cache
             ->expects($this->once())
             ->method('save')
-            ->with('28b67e05be4482c82f7fe28ea091ec6669e1cac4-response', str($response))
+            ->with('28b67e05be4482c82f7fe28ea091ec6669e1cac4-response', Message::toString($response))
         ;
 
         $this->strategy->storeResponse($request, $response);

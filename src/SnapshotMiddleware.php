@@ -8,7 +8,6 @@ use EmanueleMinotto\GuzzleSnapshot\Strategy\StrategyInterface;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\rewind_body;
 
 class SnapshotMiddleware
 {
@@ -54,7 +53,10 @@ class SnapshotMiddleware
     {
         return function (ResponseInterface $response) use ($request) {
             $this->strategy->storeResponse($request, $response);
-            rewind_body($response);
+            $body = $response->getBody();
+            if ($body->isSeekable()) {
+                $body->rewind();
+            }
             return $response;
         };
     }

@@ -7,7 +7,7 @@ namespace EmanueleMinotto\GuzzleSnapshot\Strategy;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Psr7\str;
+use GuzzleHttp\Psr7\Message;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -48,7 +48,7 @@ class ReadableFileStrategyTest extends TestCase
         $response = new Response();
 
         vfsStream::newFile($id.'-response.txt')
-            ->withContent(str($response))
+            ->withContent(Message::toString($response))
             ->at($this->fileSystem)
         ;
 
@@ -68,7 +68,7 @@ class ReadableFileStrategyTest extends TestCase
 
         $this->assertTrue($this->fileSystem->hasChild($file));
         $this->assertSame(
-            str($request),
+            Message::toString($request),
             file_get_contents($this->fileSystem->getChild($file)->url())
         );
     }
@@ -86,7 +86,7 @@ class ReadableFileStrategyTest extends TestCase
 
         $this->assertTrue($this->fileSystem->hasChild($file));
         $this->assertSame(
-            str($response),
+            Message::toString($response),
             file_get_contents($this->fileSystem->getChild($file)->url())
         );
     }

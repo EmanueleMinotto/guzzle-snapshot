@@ -2,9 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 [Guzzle](https://github.com/guzzle/guzzle) 6 & 7 middleware to store responses and requests and replay them in tests.
@@ -85,15 +83,11 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/emanueleminotto/guzzle-snapshot.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/EmanueleMinotto/guzzle-snapshot/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/EmanueleMinotto/guzzle-snapshot.svg?style=flat-square
+[ico-github-actions]: https://img.shields.io/github/actions/workflow/status/EmanueleMinotto/guzzle-snapshot/tests.yml?branch=master&style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/emanueleminotto/guzzle-snapshot.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/emanueleminotto/guzzle-snapshot
-[link-travis]: https://travis-ci.org/EmanueleMinotto/guzzle-snapshot
-[link-scrutinizer]: https://scrutinizer-ci.com/g/EmanueleMinotto/guzzle-snapshot/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/EmanueleMinotto/guzzle-snapshot
+[link-github-actions]: https://github.com/EmanueleMinotto/guzzle-snapshot/actions
 [link-downloads]: https://packagist.org/packages/emanueleminotto/guzzle-snapshot
 [link-author]: https://github.com/EmanueleMinotto
 [link-contributors]: ../../contributors

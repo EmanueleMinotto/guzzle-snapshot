@@ -1,0 +1,47 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.1', '7.2', '7.3', '7.4']
+        guzzle: ['6.*', '7.*']
+        prefer-lowest: ['']
+        exclude:
+          # only guzzle 6 supports php 7.1
+          - php: '7.1'
+            guzzle: '7.*'
+        include:
+          - php: '7.2'
+            guzzle: '6.*'
+            prefer-lowest: '--prefer-lowest'
+          - php: '7.2'
+            guzzle: '7.*'
+            prefer-lowest: '--prefer-lowest'
+
+    name: PHP ${{ matrix.php }} - guzzle ${{ matrix.guzzle }} ${{ matrix.prefer-lowest }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Require guzzle version
+        run: composer require "guzzlehttp/guzzle:${{ matrix.guzzle }}" --no-update
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress ${{ matrix.prefer-lowest }}
+
+      - name: Run tests
+        run: vendor/bin/phpunit

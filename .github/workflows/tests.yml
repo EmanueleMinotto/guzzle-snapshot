@@ -13,12 +13,29 @@ jobs:
       fail-fast: false
       matrix:
         php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        guzzle: ['7.*']
         prefer-lowest: ['']
         include:
           - php: '7.2'
+            guzzle: '7.*'
             prefer-lowest: '--prefer-lowest'
+          - php: '8.1'
+            guzzle: '8.*'
+            prefer-lowest: ''
+          - php: '8.2'
+            guzzle: '8.*'
+            prefer-lowest: ''
+          - php: '8.3'
+            guzzle: '8.*'
+            prefer-lowest: ''
+          - php: '8.4'
+            guzzle: '8.*'
+            prefer-lowest: ''
+          - php: '8.5'
+            guzzle: '8.*'
+            prefer-lowest: ''
 
-    name: PHP ${{ matrix.php }} ${{ matrix.prefer-lowest }}
+    name: PHP ${{ matrix.php }} Guzzle ${{ matrix.guzzle }} ${{ matrix.prefer-lowest }}
 
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +46,7 @@ jobs:
           php-version: ${{ matrix.php }}
 
       - name: Require guzzle version
-        run: composer require "guzzlehttp/guzzle:7.*" --no-update
+        run: composer require "guzzlehttp/guzzle:${{ matrix.guzzle }}" --no-update
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction --no-progress ${{ matrix.prefer-lowest }}

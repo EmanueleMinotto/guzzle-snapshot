@@ -5,7 +5,7 @@
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-[Guzzle](https://github.com/guzzle/guzzle) 6 & 7 middleware to store responses and requests and replay them in tests.
+[Guzzle](https://github.com/guzzle/guzzle) 6, 7 & 8 middleware to store responses and requests and replay them in tests.
 
 ## Structure
 

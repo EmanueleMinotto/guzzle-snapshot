@@ -75,16 +75,18 @@ class SnapshotMiddlewareTest extends TestCase
         $this->assertTrue($this->fileSystem->hasChildren());
         $this->assertCount(1, $this->fileSystem->getChildren());
 
-        $handler = $this->createMock(CurlHandler::class);
-        $handler
-            ->expects($this->never())
-            ->method('__invoke')
-        ;
+        $handlerCalled = false;
+        $handler = function () use (&$handlerCalled) {
+            $handlerCalled = true;
+
+            return new \GuzzleHttp\Promise\FulfilledPromise(new \GuzzleHttp\Psr7\Response());
+        };
 
         $this->stack->setHandler($handler);
 
         $this->client->get('https://httpbin.org/get');
 
+        $this->assertFalse($handlerCalled);
         $this->assertCount(1, $this->fileSystem->getChildren());
     }
 
